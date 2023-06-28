@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_gallery"
+            android:icon="@drawable/inventory_svgrepo_com"
+            android:iconTint="@color/green_200"
+            android:title="@string/nav_inventory" />
+        <item
+            android:id="@+id/nav_import_data"
+            android:icon="@drawable/import_1_svgrepo_com"
+            android:title="@string/nav_import" />
+
+    <!--    <item
+            android:id="@+id/nav_slideshow"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_slideshow" />-->
+    </group>
+</menu>
