@@ -38,6 +38,8 @@ public class SecondFragment extends Fragment implements AddItemDialogFragment.No
         for (String code : getArguments().getStringArrayList("data")) {
             scannedCodes.add(new Inventory(code));
         }
+        inventoryTableManager = new InventoryTableManager(getContext());
+        inventoryTableManager.open();
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         Log.d("SECOND ACT", "Incoming list" + scannedCodes.toString());
 
@@ -81,5 +83,6 @@ public class SecondFragment extends Fragment implements AddItemDialogFragment.No
     @Override
     public void onDialogAddClick(AddItemDialogFragment dialog) {
         inventoryTableManager.insert(dialog.getPartialInventory());
+        dialog.dismiss();
     }
 }

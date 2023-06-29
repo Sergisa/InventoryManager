@@ -49,11 +49,14 @@ public class AddItemDialogFragment extends DialogFragment {
         inventoryNumberEditText = rootView.findViewById(R.id.inventory_number);
         inventoryNameEditText = rootView.findViewById(R.id.inv_name);
         inventoryAdditionalCodeEditText = rootView.findViewById(R.id.additional_code);
+        inventoryNumberEditText.setText(partialInventory.getInventoryNumber());
         (rootView.findViewById(R.id.add_record)).setOnClickListener(view -> {
-            partialInventory.withName(inventoryNameEditText.getText().toString());
+            partialInventory
+                    .withName(inventoryNameEditText.getText().toString())
+                    .withAdditionalCode(inventoryAdditionalCodeEditText.getText().toString())
+                    .withInventoryNumber(inventoryNumberEditText.getText().toString());
             dialogListener.onDialogAddClick(AddItemDialogFragment.this);
         });
-        inventoryNumberEditText.setText(partialInventory.getInventoryNumber());
         return builder
                 .setTitle("Добавление")
                 .setIcon(R.drawable.add_to_queue_svgrepo_com)

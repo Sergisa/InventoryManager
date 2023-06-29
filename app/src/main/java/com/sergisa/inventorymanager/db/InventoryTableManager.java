@@ -37,6 +37,7 @@ public class InventoryTableManager {
 
     public void insert(Inventory inv) {
         ContentValues contentValue = new ContentValues();
+        contentValue.put(DatabaseHelper.INV_NUMBER, inv.getInventoryNumber());
         contentValue.put(DatabaseHelper.NAME, inv.getName());
         contentValue.put(DatabaseHelper.ADDITIONAL_CODE, inv.getAdditionalCode());
         contentValue.put(DatabaseHelper.ROOM, inv.getRoom());
@@ -81,7 +82,7 @@ public class InventoryTableManager {
                 int roomFieldColumnIndex = c.getColumnIndex(DatabaseHelper.ROOM);
                 String ID = c.getString(nameFieldColumnIndex);
                 list.add(
-                        new Inventory(ID)
+                        new Inventory(Integer.parseInt(ID))
                                 .withName(c.getString(descFieldColumnIndex))
                                 .withInventoryNumber(c.getString(invFieldColumnIndex))
                                 .withAdditionalCode(c.getString(additionalCodeFieldColumnIndex))
@@ -93,8 +94,9 @@ public class InventoryTableManager {
         return list;
     }
 
-    public void delete(long _id) {
-        database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper._ID + "=" + _id, null);
+    public void delete(Inventory inv) {
+        Log.d("TABLE MANAGERR", inv.toString());
+        database.delete(DatabaseHelper.TABLE_NAME, DatabaseHelper._ID + "=" + inv.getID(), null);
     }
 }
 

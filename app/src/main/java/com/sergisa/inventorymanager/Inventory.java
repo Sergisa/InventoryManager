@@ -65,12 +65,15 @@ public class Inventory {
         return ID;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Inventory{" +
                 "inventoryNumber='" + inventoryNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", additionalCode='" + additionalCode + '\'' +
-                "}\r\n";
+                ", room='" + room + '\'' +
+                ", ID=" + ID +
+                '}';
     }
 }

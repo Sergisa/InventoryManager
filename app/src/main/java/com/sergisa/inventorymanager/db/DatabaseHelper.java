@@ -21,7 +21,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     Map<String, String> fields = new HashMap<>();
     public static final String _ID = "ID";
-    public static final String SUBJECT = "subject";
 
     // Database Information
     static final String DB_NAME = "JOURNALDEV_COUNTRIES.DB";
@@ -30,6 +29,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final int DB_VERSION = 1;
 
     // Creating table query
+    private static final String CREATE_TABLE_ROOMS = "CREATE TABLE IF NOT EXISTS Rooms ( ID INTEGER PRIMARY KEY AUTOINCREMENT, number TEXT, description TEXT);";
     private static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS Inventory ( ID INTEGER PRIMARY KEY AUTOINCREMENT, additional_code TEXT, name TEXT, inventory_number TEXT, room TEXT);";
     private static final String EQUIPMENT_CREATION = "CREATE TABLE IF NOT EXISTS Equipment (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, inventory_id TEXT);";
 
@@ -59,12 +59,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE);
         db.execSQL(EQUIPMENT_CREATION);
+        db.execSQL(CREATE_TABLE_ROOMS);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + "Inventory");
         db.execSQL("DROP TABLE IF EXISTS " + "Equipment");
+        db.execSQL("DROP TABLE IF EXISTS " + "Rooms");
         onCreate(db);
     }
 

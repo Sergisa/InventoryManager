@@ -54,7 +54,6 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
                     .withDialogListener(GalleryFragment.this)
                     .show(fragmentManager, "");
         });
-        //galleryViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
@@ -76,13 +75,11 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
 
     @Override
     public void onDialogRemoveClick(EditItemDialogFragment dialog) {
-        inventoryTableManager.delete(Long.parseLong(dialog.getInventoryId()));
-        //listViewAdapter.
+        inventoryTableManager.delete(dialog.getInventory());
         itemsListView.swapAdapter(new InventoryAdapter(
                 getContext(),
                 inventoryTableManager.getInventory().toArray(new Inventory[0])
         ), true);
-        //adapter.changeCursor(dbManager.fetch());
         dialog.dismiss();
     }
 
