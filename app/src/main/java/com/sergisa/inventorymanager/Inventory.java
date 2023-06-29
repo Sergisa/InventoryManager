@@ -6,6 +6,7 @@ public class Inventory {
     String inventoryNumber = "";
     String name = "";
     String additionalCode = "";
+    String room = "";
 
     public Inventory(String inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
@@ -40,6 +41,17 @@ public class Inventory {
     public Inventory withAdditionalCode(String additionalCode) {
         if (additionalCode != null) {
             this.additionalCode = additionalCode;
+        }
+        return this;
+    }
+
+    public String getRoom() {
+        return room;
+    }
+
+    public Inventory withRoom(String room) {
+        if (room != null) {
+            this.room = room;
         }
         return this;
     }

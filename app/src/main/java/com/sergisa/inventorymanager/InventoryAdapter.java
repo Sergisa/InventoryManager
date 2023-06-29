@@ -48,6 +48,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         holder.inventoryNumberTextView.setText(singleInventory.getInventoryNumber());
         holder.additionalCodeTextView.setText(singleInventory.getAdditionalCode());
         holder.nameTextView.setText(singleInventory.getName());
+        holder.roomTextView.setText(singleInventory.getRoom());
         if (singleInventory.getName().isEmpty()) {
             holder.nameTextView.setVisibility(View.GONE);
         } else {
@@ -62,6 +63,11 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
             holder.inventoryNumberTextView.setVisibility(View.GONE);
         } else {
             holder.inventoryNumberTextView.setVisibility(View.VISIBLE);
+        }
+        if (singleInventory.getRoom().isEmpty()) {
+            holder.roomTextView.setVisibility(View.GONE);
+        } else {
+            holder.roomTextView.setVisibility(View.VISIBLE);
         }
         holder.bind(inventory[position], inventoryClickListener);
     }
@@ -93,6 +99,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         final TextView inventoryNumberTextView;
         final TextView additionalCodeTextView;
         final TextView nameTextView;
+        final TextView roomTextView;
         final Button optionsButton;
 
         InventoryItemViewHolder(View view) {
@@ -100,6 +107,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
             optionsButton = view.findViewById(R.id.actionButton);
             inventoryNumberTextView = view.findViewById(R.id.inventory_code);
             additionalCodeTextView = view.findViewById(R.id.additional_code);
+            roomTextView = view.findViewById(R.id.room);
             nameTextView = view.findViewById(R.id.name);
         }
 

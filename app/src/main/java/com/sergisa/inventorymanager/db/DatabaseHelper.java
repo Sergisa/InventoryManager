@@ -15,6 +15,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     // Table Name
     public static final String TABLE_NAME = "Inventory";
     public static final String INV_NUMBER = "inventory_number";
+    public static final String ROOM = "room";
     public static final String NAME = "name";
     public static final String ADDITIONAL_CODE = "additional_code";
 
@@ -29,7 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     static final int DB_VERSION = 1;
 
     // Creating table query
-    private static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS Inventory ( ID INTEGER PRIMARY KEY AUTOINCREMENT, additional_code TEXT, name TEXT, inventory_number TEXT);";
+    private static String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS Inventory ( ID INTEGER PRIMARY KEY AUTOINCREMENT, additional_code TEXT, name TEXT, inventory_number TEXT, room TEXT);";
     private static final String EQUIPMENT_CREATION = "CREATE TABLE IF NOT EXISTS Equipment (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, inventory_id TEXT);";
 
     public DatabaseHelper(Context context) {

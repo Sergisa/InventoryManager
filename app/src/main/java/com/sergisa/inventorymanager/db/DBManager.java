@@ -49,7 +49,7 @@ public class DBManager {
     }
 
     public Cursor fetch() {
-        String[] columns = new String[]{DatabaseHelper._ID, DatabaseHelper.INV_NUMBER, DatabaseHelper.NAME, DatabaseHelper.ADDITIONAL_CODE};
+        String[] columns = new String[]{DatabaseHelper._ID, DatabaseHelper.INV_NUMBER, DatabaseHelper.NAME, DatabaseHelper.ADDITIONAL_CODE, DatabaseHelper.ROOM};
         Cursor cursor = database.query(
                 DatabaseHelper.TABLE_NAME,
                 columns,
@@ -81,12 +81,14 @@ public class DBManager {
                 int descFieldColumnIndex = c.getColumnIndex(DatabaseHelper.NAME);
                 int invFieldColumnIndex = c.getColumnIndex(DatabaseHelper.INV_NUMBER);
                 int additionalCodeFieldColumnIndex = c.getColumnIndex(DatabaseHelper.ADDITIONAL_CODE);
+                int roomFieldColumnIndex = c.getColumnIndex(DatabaseHelper.ROOM);
                 String ID = c.getString(nameFieldColumnIndex);
                 list.add(
                         new Inventory(ID)
                                 .withName(c.getString(descFieldColumnIndex))
                                 .withInventoryNumber(c.getString(invFieldColumnIndex))
                                 .withAdditionalCode(c.getString(additionalCodeFieldColumnIndex))
+                                .withRoom(c.getString(roomFieldColumnIndex))
                 );
             } while (c.moveToNext());
         }
