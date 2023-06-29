@@ -7,6 +7,11 @@ public class Inventory {
     String name = "";
     String additionalCode = "";
     String room = "";
+    int ID;
+
+    public Inventory(int id) {
+        ID = id;
+    }
 
     public Inventory(String inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
@@ -54,6 +59,10 @@ public class Inventory {
             this.room = room;
         }
         return this;
+    }
+
+    public int getID() {
+        return ID;
     }
 
     @Override

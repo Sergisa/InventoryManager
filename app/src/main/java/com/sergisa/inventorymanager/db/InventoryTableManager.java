@@ -3,22 +3,17 @@ package com.sergisa.inventorymanager.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.FileUtils;
 import android.util.Log;
 
 import com.sergisa.inventorymanager.Inventory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DBManager {
+public class InventoryTableManager {
 
     private DatabaseHelper dbHelper;
 
@@ -26,11 +21,11 @@ public class DBManager {
 
     private SQLiteDatabase database;
 
-    public DBManager(Context c) {
+    public InventoryTableManager(Context c) {
         context = c;
     }
 
-    public DBManager open() throws SQLException {
+    public InventoryTableManager open() throws SQLException {
         dbHelper = new DatabaseHelper(context);
         database = dbHelper.getWritableDatabase();
         return this;
@@ -40,11 +35,11 @@ public class DBManager {
         dbHelper.close();
     }
 
-    public void insert(String name, String desc) {
+    public void insert(Inventory inv) {
         ContentValues contentValue = new ContentValues();
-        contentValue.put("additional_code", "123");
-        contentValue.put(DatabaseHelper.SUBJECT, name);
-        contentValue.put(DatabaseHelper.NAME, desc);
+        contentValue.put(DatabaseHelper.NAME, inv.getName());
+        contentValue.put(DatabaseHelper.ADDITIONAL_CODE, inv.getAdditionalCode());
+        contentValue.put(DatabaseHelper.ROOM, inv.getRoom());
         database.insert(DatabaseHelper.TABLE_NAME, null, contentValue);
     }
 
@@ -65,11 +60,13 @@ public class DBManager {
         return cursor;
     }
 
-    public int update(long _id, String name, String desc) {
+    public int update(Inventory inv) {
         ContentValues contentValues = new ContentValues();
-        contentValues.put(DatabaseHelper.SUBJECT, name);
-        contentValues.put(DatabaseHelper.NAME, desc);
-        return database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper._ID + " = " + _id, null);
+        contentValues.put(DatabaseHelper.NAME, inv.getName());
+        contentValues.put(DatabaseHelper.ROOM, inv.getRoom());
+        contentValues.put(DatabaseHelper.INV_NUMBER, inv.getInventoryNumber());
+        contentValues.put(DatabaseHelper.ADDITIONAL_CODE, inv.getAdditionalCode());
+        return database.update(DatabaseHelper.TABLE_NAME, contentValues, DatabaseHelper._ID + " = " + inv.getID(), null);
     }
 
     public List<Inventory> getInventory() {

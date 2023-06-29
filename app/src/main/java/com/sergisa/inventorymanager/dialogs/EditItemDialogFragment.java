@@ -24,6 +24,11 @@ public class EditItemDialogFragment extends DialogFragment {
         this.inventory = inv;
     }
 
+    public EditItemDialogFragment withId(String id) {
+        this.id = id;
+        return this;
+    }
+
     public interface NoticeDialogListener {
         void onDialogRemoveClick(EditItemDialogFragment dialog);
 
@@ -59,31 +64,12 @@ public class EditItemDialogFragment extends DialogFragment {
                 .create();
     }
 
-   /* @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            listener = (NoticeDialogListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().toString() + " must implement NoticeDialogListener");
-        }
-    }*/
-
     public String getInventoryId() {
         return id;
     }
 
-    public EditItemDialogFragment withId(String id) {
-        this.id = id;
-        return this;
-    }
-
-    public String getTitle() {
-        return ((TextView) rootView.findViewById(R.id.subject_edittext)).getText().toString();
-    }
-
-    public String getDescription() {
-        return ((TextView) rootView.findViewById(R.id.description_edittext)).getText().toString();
+    public Inventory getInventory() {
+        return inventory;
     }
 
     public EditItemDialogFragment withDialogListener(NoticeDialogListener dialogListener) {

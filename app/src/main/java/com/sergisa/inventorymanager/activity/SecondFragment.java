@@ -10,22 +10,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.DividerItemDecoration;
 
 import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.InventoryAdapter;
 import com.sergisa.inventorymanager.R;
 import com.sergisa.inventorymanager.databinding.FragmentSecondBinding;
-import com.sergisa.inventorymanager.dialogs.EditItemDialogFragment;
+import com.sergisa.inventorymanager.db.InventoryTableManager;
+import com.sergisa.inventorymanager.dialogs.AddItemDialogFragment;
 import com.sergisa.inventorymanager.ui.DatabaseViewer;
-import com.sergisa.inventorymanager.ui.gallery.GalleryFragment;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SecondFragment extends Fragment implements EditItemDialogFragment.NoticeDialogListener {
+public class SecondFragment extends Fragment implements AddItemDialogFragment.NoticeDialogListener {
 
     private FragmentSecondBinding binding;
     List<Inventory> scannedCodes;
+    InventoryTableManager inventoryTableManager;
 
     @Override
     public View onCreateView(
@@ -43,7 +45,7 @@ public class SecondFragment extends Fragment implements EditItemDialogFragment.N
                 getContext(),
                 scannedCodes.toArray(new Inventory[]{})
         ).withInventoryClickListener(item -> {
-            new EditItemDialogFragment(item)
+            new AddItemDialogFragment(item)
                     .withDialogListener(SecondFragment.this)
                     .show(getActivity().getSupportFragmentManager(), "");
         });
@@ -51,6 +53,9 @@ public class SecondFragment extends Fragment implements EditItemDialogFragment.N
             Log.d("SECOND FRAGMENT -> LIST", singleInventory.toString());
         });
         binding.listView.setAdapter(adapter);
+        binding.listView.addItemDecoration(
+                new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL)
+        );
         binding.viewDatabaseButton.setOnClickListener(view -> {
             Intent home_intent = new Intent(getContext(), DatabaseViewer.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(home_intent);
@@ -74,12 +79,7 @@ public class SecondFragment extends Fragment implements EditItemDialogFragment.N
     }
 
     @Override
-    public void onDialogRemoveClick(EditItemDialogFragment dialog) {
-
-    }
-
-    @Override
-    public void onDialogEditClick(EditItemDialogFragment dialog) {
-
+    public void onDialogAddClick(AddItemDialogFragment dialog) {
+        inventoryTableManager.insert(dialog.getPartialInventory());
     }
 }

@@ -45,33 +45,11 @@ public class FirstFragment extends Fragment {
 
     public void onViewCreated(@NonNull View mainView, Bundle savedInstanceState) {
         super.onViewCreated(mainView, savedInstanceState);
-
-        /*binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
-        });*/
-        //NavController navController = Navigation.findNavController(getActivity(), R.id.nav_host_fragment_content_main);
-
         codeScanner = new CodeScanner(getContext(), binding.scannerView);
         codeScanner.setCamera(activeCamera);
         codeScanner.setDecodeCallback(result -> {
             getActivity().runOnUiThread(() -> {
                 codeScanner.stopPreview();
-                /*Snackbar.make(binding.scannerView, result.getText(), Snackbar.LENGTH_INDEFINITE)
-                        .setAnchorView(R.id.fab)
-                        .setAnimationMode(BaseTransientBottomBar.ANIMATION_MODE_SLIDE)
-                        .setAction("Подробнее", view -> {
-                            Log.d("SCANNING", "options");
-                        })
-                        .setAction("ADD", view -> {
-                            mainActivity.add(result.getText());
-                            Log.d("SCANNING", "scanned" + result.getText());
-                            Log.d("SCANNING", mainActivity.getScannedLines().toString());
-                            //codeScanner.startPreview();
-                        }).show();*/
                 showBottomSheetDialog(result.getText());
             });
         });

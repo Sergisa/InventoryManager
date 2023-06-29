@@ -4,12 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="10dp"
+    android:paddingEnd="10dp"
+    android:paddingStart="10dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:showIn="@layout/app_bar_database_viewer">
 
     <fragment
-
         android:id="@+id/nav_host_fragment_content_database_viewer"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="match_parent"

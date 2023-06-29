@@ -4,19 +4,33 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="20dp" >
-
-    <EditText
-        android:id="@+id/subject_edittext"
+    <LinearLayout
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="@string/enter_title" >
-        <requestFocus />
-    </EditText>
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/inventory_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_weight="2"
+            android:hint="@string/enter_title">
+            <requestFocus />
+        </EditText>
+        <EditText
+            android:id="@+id/additional_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ems="5"
+            android:hint="@string/additional_code">
+            <requestFocus />
+        </EditText>
+    </LinearLayout>
 
     <EditText
         android:gravity="top"
-        android:id="@+id/description_edittext"
+        android:id="@+id/inv_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
