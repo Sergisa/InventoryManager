@@ -19,6 +19,10 @@ public class EditItemDialogFragment extends DialogFragment {
     private final Inventory inventory;
     String id = "";
     View rootView;
+    EditText invNumberTextEditView;
+    EditText additionalCodeTextEditView;
+    EditText invNameTextEditView;
+    NoticeDialogListener dialogListener;
 
     public EditItemDialogFragment(Inventory inv) {
         this.inventory = inv;
@@ -35,7 +39,6 @@ public class EditItemDialogFragment extends DialogFragment {
         void onDialogEditClick(EditItemDialogFragment dialog);
     }
 
-    NoticeDialogListener dialogListener;
 
     @NonNull
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -49,9 +52,9 @@ public class EditItemDialogFragment extends DialogFragment {
         (rootView.findViewById(R.id.btn_delete)).setOnClickListener(view -> {
             dialogListener.onDialogRemoveClick(EditItemDialogFragment.this);
         });
-        EditText invNumberTextEditView = rootView.findViewById(R.id.inventory_number);
-        EditText additionalCodeTextEditView = rootView.findViewById(R.id.additional_code);
-        EditText invNameTextEditView = rootView.findViewById(R.id.inv_name);
+        invNumberTextEditView = rootView.findViewById(R.id.inventory_number);
+        additionalCodeTextEditView = rootView.findViewById(R.id.additional_code);
+        invNameTextEditView = rootView.findViewById(R.id.inv_name);
         invNumberTextEditView.setText(inventory.getInventoryNumber());
         additionalCodeTextEditView.setText(inventory.getAdditionalCode());
         invNameTextEditView.setText(inventory.getName());
@@ -69,6 +72,9 @@ public class EditItemDialogFragment extends DialogFragment {
     }
 
     public Inventory getInventory() {
+        inventory.withInventoryNumber(invNumberTextEditView.getText().toString())
+                .withAdditionalCode(additionalCodeTextEditView.getText().toString())
+                .withName(invNameTextEditView.getText().toString());
         return inventory;
     }
 

@@ -2,12 +2,22 @@ package com.sergisa.inventorymanager;
 
 import androidx.annotation.NonNull;
 
+import com.sergisa.inventorymanager.annotations.DataBaseKey;
+
+@DataBaseKey(key = "Inventory")
 public class Inventory {
+    @DataBaseKey(key = "inventory_number")
     String inventoryNumber = "";
+    @DataBaseKey(key = "name")
     String name = "";
+    @DataBaseKey(key = "additional_code")
     String additionalCode = "";
+    @DataBaseKey(key = "room")
     String room = "";
     int ID;
+
+    public Inventory() {
+    }
 
     public Inventory(int id) {
         ID = id;

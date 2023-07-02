@@ -5,9 +5,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -15,7 +13,9 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.budiyev.android.codescanner.CodeScanner;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.Result;
+import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.R;
 import com.sergisa.inventorymanager.databinding.FragmentFirstBinding;
 
@@ -50,7 +50,7 @@ public class FirstFragment extends Fragment {
         codeScanner.setDecodeCallback(result -> {
             getActivity().runOnUiThread(() -> {
                 codeScanner.stopPreview();
-                showBottomSheetDialog(result.getText());
+                showBottomSheetDialog(result);
             });
         });
         binding.rotateCamera.setOnClickListener(view -> {
@@ -67,10 +67,8 @@ public class FirstFragment extends Fragment {
             codeScanner.startPreview();
         });
         binding.fab.setOnClickListener(view -> {
-            Bundle transferBundle = new Bundle();
-            transferBundle.putStringArrayList("data", (ArrayList<String>) mainActivity.getScannedLines());
             NavHostFragment.findNavController(FirstFragment.this)
-                    .navigate(R.id.action_FirstFragment_to_SecondFragment, transferBundle);
+                    .navigate(R.id.action_FirstFragment_to_SecondFragment);
         });
         binding.scannerView.setOnClickListener(view -> {
             codeScanner.startPreview();
@@ -95,15 +93,22 @@ public class FirstFragment extends Fragment {
         binding = null;
     }
 
-    private void showBottomSheetDialog(String result) {
+    private void showBottomSheetDialog(Result result) {
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        binding.inventoryNumber.setText(result);
-        mainActivity.add(result);
-        binding.addButton.setOnClickListener((view) -> {
-            Log.d("SCANNING", "scanned" + result);
-            Log.d("SCANNING", mainActivity.getScannedLines().toString());
+        binding.inventoryNumber.setText(result.getText());
+        Inventory partialInventory;
+        if (result.getBarcodeFormat() == BarcodeFormat.DATA_MATRIX) {
+            partialInventory = new Inventory().withAdditionalCode(result.getText());
+        } else if (result.getBarcodeFormat() == BarcodeFormat.QR_CODE) {
+            partialInventory = new Inventory(result.getText());
+        } else {
+            partialInventory = new Inventory();
+        }
+        mainActivity.add(partialInventory);
+        /*binding.addButton.setOnClickListener((view) -> {
+            Log.d("FIRST FRAGMENT: scannedInventory", partialInventory.toString());
             behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
             //codeScanner.startPreview();
-        });
+        });*/
     }
 }

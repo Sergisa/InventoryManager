@@ -10,18 +10,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.List;
+
 public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.InventoryItemViewHolder> {
     public interface OnInventoryClickListener {
         void onItemClick(Inventory item);
     }
 
     private final LayoutInflater inflater;
-    private final Inventory[] inventory;
+    private final List<Inventory> inventory;
     private OnInventoryOptionsClickListener optionsClickListener;
     OnInventoryClickListener inventoryClickListener;
     Context ctx;
 
-    public InventoryAdapter(Context context, Inventory[] inventory) {
+    public InventoryAdapter(Context context, List<Inventory> inventory) {
         ctx = context;
         this.inventory = inventory;
         this.inflater = LayoutInflater.from(context);
@@ -35,7 +37,7 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
         InventoryItemViewHolder holder = new InventoryItemViewHolder(view);
         View.OnClickListener clickListener = view1 -> {
             if (optionsClickListener != null) {
-                optionsClickListener.onButtonClick(view1, inventory[holder.getAdapterPosition()], holder.getAdapterPosition());
+                optionsClickListener.onButtonClick(view1, inventory.get(holder.getAdapterPosition()), holder.getAdapterPosition());
             }
         };
         holder.optionsButton.setOnClickListener(clickListener);
@@ -44,37 +46,30 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
 
     @Override
     public void onBindViewHolder(@NonNull InventoryItemViewHolder holder, int position) {
-        Inventory singleInventory = inventory[position];
+        Inventory singleInventory = inventory.get(position);
         holder.inventoryNumberTextView.setText(singleInventory.getInventoryNumber());
         holder.additionalCodeTextView.setText(singleInventory.getAdditionalCode());
         holder.nameTextView.setText(singleInventory.getName());
         holder.roomTextView.setText(singleInventory.getRoom());
-        if (singleInventory.getName().isEmpty()) {
-            holder.nameTextView.setVisibility(View.GONE);
+
+        adjustView(holder.nameTextView, singleInventory.getName());
+        adjustView(holder.additionalCodeTextView, singleInventory.getAdditionalCode());
+        adjustView(holder.inventoryNumberTextView, singleInventory.getInventoryNumber());
+        adjustView(holder.roomTextView, singleInventory.getRoom());
+        holder.bind(inventory.get(position), inventoryClickListener);
+    }
+
+    private void adjustView(View view, String value) {
+        if (value.isEmpty()) {
+            view.setVisibility(View.GONE);
         } else {
-            holder.nameTextView.setVisibility(View.VISIBLE);
+            view.setVisibility(View.VISIBLE);
         }
-        if (singleInventory.getAdditionalCode().isEmpty()) {
-            holder.additionalCodeTextView.setVisibility(View.GONE);
-        } else {
-            holder.additionalCodeTextView.setVisibility(View.VISIBLE);
-        }
-        if (singleInventory.getInventoryNumber().isEmpty()) {
-            holder.inventoryNumberTextView.setVisibility(View.GONE);
-        } else {
-            holder.inventoryNumberTextView.setVisibility(View.VISIBLE);
-        }
-        if (singleInventory.getRoom().isEmpty()) {
-            holder.roomTextView.setVisibility(View.GONE);
-        } else {
-            holder.roomTextView.setVisibility(View.VISIBLE);
-        }
-        holder.bind(inventory[position], inventoryClickListener);
     }
 
     @Override
     public int getItemCount() {
-        return inventory.length;
+        return inventory.size();
     }
 
     public OnInventoryOptionsClickListener getOptionsClickListener() {

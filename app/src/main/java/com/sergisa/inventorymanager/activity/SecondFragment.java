@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.InventoryAdapter;
@@ -20,6 +21,7 @@ import com.sergisa.inventorymanager.db.InventoryTableManager;
 import com.sergisa.inventorymanager.dialogs.AddItemDialogFragment;
 import com.sergisa.inventorymanager.ui.DatabaseViewer;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,24 +30,24 @@ public class SecondFragment extends Fragment implements AddItemDialogFragment.No
     private FragmentSecondBinding binding;
     List<Inventory> scannedCodes;
     InventoryTableManager inventoryTableManager;
+    MainActivity mainActivity;
+    InventoryAdapter adapter;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-        scannedCodes = new ArrayList<>();
-        for (String code : getArguments().getStringArrayList("data")) {
-            scannedCodes.add(new Inventory(code));
-        }
+        mainActivity = (MainActivity) getActivity();
+        scannedCodes = mainActivity.getScannedInventory();
         inventoryTableManager = new InventoryTableManager(getContext());
         inventoryTableManager.open();
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         Log.d("SECOND ACT", "Incoming list" + scannedCodes.toString());
 
-        InventoryAdapter adapter = new InventoryAdapter(
+        adapter = new InventoryAdapter(
                 getContext(),
-                scannedCodes.toArray(new Inventory[]{})
+                scannedCodes
         ).withInventoryClickListener(item -> {
             new AddItemDialogFragment(item)
                     .withDialogListener(SecondFragment.this)
@@ -62,8 +64,20 @@ public class SecondFragment extends Fragment implements AddItemDialogFragment.No
             Intent home_intent = new Intent(getContext(), DatabaseViewer.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(home_intent);
         });
+        binding.swipeRefresh.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light
+        );
+        binding.swipeRefresh.setOnRefreshListener(this::onRefresh);
         return binding.getRoot();
 
+    }
+
+    private void onRefresh() {
+        binding.swipeRefresh.setRefreshing(false);
+        //mainActivity.getScannedInventory().
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {

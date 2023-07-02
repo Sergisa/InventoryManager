@@ -13,6 +13,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.R;
 import com.sergisa.inventorymanager.databinding.ActivityMainBinding;
 import com.sergisa.inventorymanager.db.InventoryTableManager;
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private InventoryTableManager inventoryTableManager;
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
-    private final ArrayList<String> scannedLines = new ArrayList<>();
+    private final ArrayList<Inventory> scannedLines = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public boolean add(String s) {
+    public boolean add(Inventory s) {
         return scannedLines.add(s);
     }
 
-    public List<String> getScannedLines() {
+    public List<Inventory> getScannedInventory() {
         return scannedLines;
     }
 }
