@@ -3,17 +3,15 @@ package com.sergisa.inventorymanager.ui;
 import android.os.Bundle;
 import android.view.Menu;
 
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.navigation.NavigationView;
 import com.sergisa.inventorymanager.R;
-import com.sergisa.inventorymanager.activity.MainActivity;
 import com.sergisa.inventorymanager.databinding.ActivityDatabaseViewerBinding;
 
 public class DatabaseViewer extends AppCompatActivity{

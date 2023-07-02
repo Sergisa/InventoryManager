@@ -75,6 +75,11 @@ public class Inventory {
         return ID;
     }
 
+    public Inventory withID(int ID) {
+        this.ID = ID;
+        return this;
+    }
+
     @NonNull
     @Override
     public String toString() {

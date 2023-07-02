@@ -18,15 +18,16 @@ import com.google.zxing.Result;
 import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.R;
 import com.sergisa.inventorymanager.databinding.FragmentFirstBinding;
-
-import java.util.ArrayList;
+import com.sergisa.inventorymanager.db.InventoryTableManager;
 
 public class FirstFragment extends Fragment {
     CodeScanner codeScanner;
+    Inventory scannedInventory;
     MainActivity mainActivity;
     private FragmentFirstBinding binding;
     int activeCamera = CodeScanner.CAMERA_BACK;
     BottomSheetBehavior<FrameLayout> behavior;
+    InventoryTableManager inventoryTableManager;
 
     @Override
     public View onCreateView(
@@ -34,7 +35,8 @@ public class FirstFragment extends Fragment {
             Bundle savedInstanceState
     ) {
         mainActivity = (MainActivity) getActivity();
-
+        inventoryTableManager = new InventoryTableManager(getContext());
+        inventoryTableManager.open();
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         FrameLayout bottomSheetLayout = binding.bottomSheet;
         behavior = BottomSheetBehavior.from(bottomSheetLayout);
@@ -54,7 +56,6 @@ public class FirstFragment extends Fragment {
             });
         });
         binding.rotateCamera.setOnClickListener(view -> {
-            Log.d("FIRST FRAGMENT->cameras", String.valueOf(codeScanner.getCamera()));
             codeScanner.stopPreview();
             codeScanner.releaseResources();
             if (activeCamera == CodeScanner.CAMERA_FRONT) {
@@ -96,19 +97,15 @@ public class FirstFragment extends Fragment {
     private void showBottomSheetDialog(Result result) {
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
         binding.inventoryNumber.setText(result.getText());
-        Inventory partialInventory;
         if (result.getBarcodeFormat() == BarcodeFormat.DATA_MATRIX) {
-            partialInventory = new Inventory().withAdditionalCode(result.getText());
+            scannedInventory = new Inventory().withAdditionalCode(result.getText());
         } else if (result.getBarcodeFormat() == BarcodeFormat.QR_CODE) {
-            partialInventory = new Inventory(result.getText());
+            scannedInventory = new Inventory(result.getText());
         } else {
-            partialInventory = new Inventory();
+            scannedInventory = new Inventory();
         }
-        mainActivity.add(partialInventory);
-        /*binding.addButton.setOnClickListener((view) -> {
-            Log.d("FIRST FRAGMENT: scannedInventory", partialInventory.toString());
-            behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
-            //codeScanner.startPreview();
-        });*/
+        mainActivity.add(scannedInventory);
+        Log.d("CODE SCAN FRAGMENT", scannedInventory.toString());
+        Log.d("CODE SCAN FRAGMENT:request", inventoryTableManager.requestInventoryData(scannedInventory).toString());
     }
 }

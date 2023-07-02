@@ -8,7 +8,6 @@ import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.BiConsumer;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

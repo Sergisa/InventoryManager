@@ -11,7 +11,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.InventoryAdapter;
@@ -21,8 +20,6 @@ import com.sergisa.inventorymanager.db.InventoryTableManager;
 import com.sergisa.inventorymanager.dialogs.AddItemDialogFragment;
 import com.sergisa.inventorymanager.ui.DatabaseViewer;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.List;
 
 public class SecondFragment extends Fragment implements AddItemDialogFragment.NoticeDialogListener {
