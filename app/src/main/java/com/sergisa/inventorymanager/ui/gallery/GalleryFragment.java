@@ -51,11 +51,7 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
         itemsListView.addItemDecoration(
                 new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL)
         );
-        adapter.withInventoryClickListener(item -> {
-            new EditItemDialogFragment(item)
-                    .withDialogListener(GalleryFragment.this)
-                    .show(getActivity().getSupportFragmentManager(), "");
-        });
+        adapter.withInventoryClickListener(this::inventoryClicked);
         binding.addFab.setOnClickListener(view -> {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             new AddItemDialogFragment()
@@ -65,9 +61,18 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
         return root;
     }
 
+    private void inventoryClicked(Inventory inventory) {
+        new EditItemDialogFragment(inventory)
+                .withDialogListener(GalleryFragment.this)
+                .show(getActivity().getSupportFragmentManager(), "");
+    }
+
     private void onRefreshData() {
         swipeRefreshLayout.setRefreshing(false);
-        //RearrangeItems();
+        inventoryList = inventoryTableManager.getInventory();
+        adapter = new InventoryAdapter(getContext(), inventoryList)
+                .withInventoryClickListener(this::inventoryClicked);
+        itemsListView.setAdapter(adapter);
     }
 
     @Override
