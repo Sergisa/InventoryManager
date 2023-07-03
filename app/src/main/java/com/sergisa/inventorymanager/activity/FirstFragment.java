@@ -15,10 +15,11 @@ import com.budiyev.android.codescanner.CodeScanner;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.sergisa.inventorymanager.Inventory;
+import com.sergisa.inventorymanager.InventoryApp;
 import com.sergisa.inventorymanager.R;
 import com.sergisa.inventorymanager.databinding.FragmentFirstBinding;
-import com.sergisa.inventorymanager.db.InventoryTableManager;
+import com.sergisa.inventorymanager.db.Inventory;
+import com.sergisa.inventorymanager.db.InventoryDatabase;
 
 public class FirstFragment extends Fragment {
     CodeScanner codeScanner;
@@ -27,16 +28,15 @@ public class FirstFragment extends Fragment {
     private FragmentFirstBinding binding;
     int activeCamera = CodeScanner.CAMERA_BACK;
     BottomSheetBehavior<FrameLayout> behavior;
-    InventoryTableManager inventoryTableManager;
+    InventoryDatabase database;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        database = InventoryApp.getInstance().getDatabase();
         mainActivity = (MainActivity) getActivity();
-        inventoryTableManager = new InventoryTableManager(getContext());
-        inventoryTableManager.open();
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         FrameLayout bottomSheetLayout = binding.bottomSheet;
         behavior = BottomSheetBehavior.from(bottomSheetLayout);
@@ -106,6 +106,9 @@ public class FirstFragment extends Fragment {
         }
         mainActivity.add(scannedInventory);
         Log.d("CODE SCAN FRAGMENT", scannedInventory.toString());
-        Log.d("CODE SCAN FRAGMENT:request", inventoryTableManager.requestInventoryData(scannedInventory).toString());
+        Log.d(
+                "CODE SCAN FRAGMENT:request",
+                database.inventoryDao().getByCode(result.getText()).toString()
+        );
     }
 }

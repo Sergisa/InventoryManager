@@ -1,7 +1,6 @@
 package com.sergisa.inventorymanager.ui.gallery;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,17 +13,18 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.InventoryAdapter;
+import com.sergisa.inventorymanager.InventoryApp;
 import com.sergisa.inventorymanager.databinding.FragmentGalleryBinding;
-import com.sergisa.inventorymanager.db.InventoryTableManager;
+import com.sergisa.inventorymanager.db.Inventory;
+import com.sergisa.inventorymanager.db.InventoryDatabase;
 import com.sergisa.inventorymanager.dialogs.AddItemDialogFragment;
 import com.sergisa.inventorymanager.dialogs.EditItemDialogFragment;
 
 import java.util.List;
 
 public class GalleryFragment extends Fragment implements EditItemDialogFragment.NoticeDialogListener, AddItemDialogFragment.NoticeDialogListener {
-    private InventoryTableManager inventoryTableManager;
+    private InventoryDatabase inventoryTableManager;
     private FragmentGalleryBinding binding;
     RecyclerView itemsListView;
     private InventoryAdapter adapter;
@@ -40,12 +40,10 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
 
         swipeRefreshLayout = binding.swipeRefresh;
         swipeRefreshLayout.setOnRefreshListener(this::onRefreshData);
-        inventoryTableManager = new InventoryTableManager(getContext());
-        inventoryTableManager.open();
-        Log.d("GALLERY", "onCreateView: " + inventoryTableManager.getInventory().toString());
+        inventoryTableManager = InventoryApp.getInstance().getDatabase();
 
         itemsListView = binding.recordsList;
-        inventoryList = inventoryTableManager.getInventory();
+        inventoryList = inventoryTableManager.inventoryDao().getInventory();
         adapter = new InventoryAdapter(getContext(), inventoryList);
         itemsListView.setAdapter(adapter);
         itemsListView.addItemDecoration(
@@ -69,7 +67,7 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
 
     private void onRefreshData() {
         swipeRefreshLayout.setRefreshing(false);
-        inventoryList = inventoryTableManager.getInventory();
+        inventoryList = inventoryTableManager.inventoryDao().getInventory();
         adapter = new InventoryAdapter(getContext(), inventoryList)
                 .withInventoryClickListener(this::inventoryClicked);
         itemsListView.setAdapter(adapter);
@@ -84,7 +82,7 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
     @Override
     public void onDialogAddClick(AddItemDialogFragment dialog) {
         Inventory inventoryToAdd = dialog.getPartialInventory();
-        inventoryTableManager.insert(inventoryToAdd);
+        inventoryTableManager.inventoryDao().insert(inventoryToAdd);
         inventoryList.add(0, inventoryToAdd);
         adapter.notifyItemRangeChanged(0, 1);
         dialog.dismiss();
@@ -93,7 +91,7 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
     @Override
     public void onDialogRemoveClick(EditItemDialogFragment dialog) {
         Inventory inventoryToRemove = dialog.getInventory();
-        inventoryTableManager.delete(inventoryToRemove);
+        inventoryTableManager.inventoryDao().delete(inventoryToRemove);
         final int indexToRemove = inventoryList.indexOf(inventoryToRemove);
         inventoryList.removeIf(inventory -> inventory.getID() == inventoryToRemove.getID());
         adapter.notifyItemRemoved(indexToRemove);
@@ -104,7 +102,7 @@ public class GalleryFragment extends Fragment implements EditItemDialogFragment.
     public void onDialogEditClick(EditItemDialogFragment dialog) {
         Inventory inventoryToChange = dialog.getInventory();
         int changingElementIndex = inventoryList.indexOf(inventoryToChange);
-        inventoryTableManager.update(dialog.getInventory());
+        inventoryTableManager.inventoryDao().update(dialog.getInventory());
         adapter.notifyItemChanged(changingElementIndex);
         dialog.dismiss();
     }

@@ -1,29 +1,32 @@
-package com.sergisa.inventorymanager;
+package com.sergisa.inventorymanager.db;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import com.sergisa.inventorymanager.annotations.DataBaseKey;
+@Entity(tableName = "Equipment")
+public class Equipment {
+    @ColumnInfo(name = "inventory_number")
+    public String inventoryNumber = "";
+    @ColumnInfo(name = "name")
+    public String name = "";
+    @ColumnInfo(name = "additional_code")
+    public String additionalCode = "";
+    @ColumnInfo(name = "room")
+    public String room = "";
+    @PrimaryKey
+    @ColumnInfo(name = "ID")
+    public int ID;
 
-@DataBaseKey(key = "Inventory")
-public class Inventory {
-    @DataBaseKey(key = "inventory_number")
-    String inventoryNumber = "";
-    @DataBaseKey(key = "name")
-    String name = "";
-    @DataBaseKey(key = "additional_code")
-    String additionalCode = "";
-    @DataBaseKey(key = "room")
-    String room = "";
-    int ID;
-
-    public Inventory() {
+    public Equipment() {
     }
 
-    public Inventory(int id) {
+    public Equipment(int id) {
         ID = id;
     }
 
-    public Inventory(String inventoryNumber) {
+    public Equipment(String inventoryNumber) {
         this.inventoryNumber = inventoryNumber;
     }
 
@@ -31,7 +34,7 @@ public class Inventory {
         return inventoryNumber;
     }
 
-    public Inventory withInventoryNumber(String inventoryNumber) {
+    public Equipment withInventoryNumber(String inventoryNumber) {
         if (inventoryNumber != null) {
             this.inventoryNumber = inventoryNumber;
         }
@@ -42,7 +45,7 @@ public class Inventory {
         return name;
     }
 
-    public Inventory withName(String name) {
+    public Equipment withName(String name) {
         if (name != null) {
             this.name = name;
         }
@@ -53,7 +56,7 @@ public class Inventory {
         return additionalCode;
     }
 
-    public Inventory withAdditionalCode(String additionalCode) {
+    public Equipment withAdditionalCode(String additionalCode) {
         if (additionalCode != null) {
             this.additionalCode = additionalCode;
         }
@@ -64,7 +67,7 @@ public class Inventory {
         return room;
     }
 
-    public Inventory withRoom(String room) {
+    public Equipment withRoom(String room) {
         if (room != null) {
             this.room = room;
         }
@@ -75,7 +78,7 @@ public class Inventory {
         return ID;
     }
 
-    public Inventory withID(int ID) {
+    public Equipment withID(int ID) {
         this.ID = ID;
         return this;
     }

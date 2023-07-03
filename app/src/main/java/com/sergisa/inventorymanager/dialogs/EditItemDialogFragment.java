@@ -10,8 +10,8 @@ import android.widget.EditText;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 
-import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.R;
+import com.sergisa.inventorymanager.db.Inventory;
 
 public class EditItemDialogFragment extends DialogFragment {
     private final Inventory inventory;

@@ -12,11 +12,12 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 
-import com.sergisa.inventorymanager.Inventory;
 import com.sergisa.inventorymanager.InventoryAdapter;
+import com.sergisa.inventorymanager.InventoryApp;
 import com.sergisa.inventorymanager.R;
 import com.sergisa.inventorymanager.databinding.FragmentSecondBinding;
-import com.sergisa.inventorymanager.db.InventoryTableManager;
+import com.sergisa.inventorymanager.db.Inventory;
+import com.sergisa.inventorymanager.db.InventoryDatabase;
 import com.sergisa.inventorymanager.dialogs.AddItemDialogFragment;
 import com.sergisa.inventorymanager.ui.DatabaseViewer;
 
@@ -26,19 +27,18 @@ public class SecondFragment extends Fragment implements AddItemDialogFragment.No
 
     private FragmentSecondBinding binding;
     List<Inventory> scannedCodes;
-    InventoryTableManager inventoryTableManager;
     MainActivity mainActivity;
     InventoryAdapter adapter;
+    InventoryDatabase database;
 
     @Override
     public View onCreateView(
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
+        database = InventoryApp.getInstance().getDatabase();
         mainActivity = (MainActivity) getActivity();
         scannedCodes = mainActivity.getScannedInventory();
-        inventoryTableManager = new InventoryTableManager(getContext());
-        inventoryTableManager.open();
         binding = FragmentSecondBinding.inflate(inflater, container, false);
         Log.d("SECOND ACT", "Incoming list" + scannedCodes.toString());
 
@@ -93,7 +93,7 @@ public class SecondFragment extends Fragment implements AddItemDialogFragment.No
 
     @Override
     public void onDialogAddClick(AddItemDialogFragment dialog) {
-        inventoryTableManager.insert(dialog.getPartialInventory());
+        database.inventoryDao().insert(dialog.getPartialInventory());
         dialog.dismiss();
     }
 }
