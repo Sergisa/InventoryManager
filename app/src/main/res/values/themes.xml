@@ -27,15 +27,71 @@
 
     <style name="mainButtonStyle" parent="Widget.Material3.Button.OutlinedButton">
         <item name="cornerRadius">5dp</item>
-        <item name="android:textColor">@android:color/holo_orange_dark</item>
+        <item name="android:textColor">@color/purple_500</item>
         <item name="android:textSize">15sp</item>
-        <item name="strokeColor">@color/purple_500</item>
+        <item name="strokeColor">@color/purple_200</item>
     </style>
 
-    <style name="dialogButton" parent="mainButtonStyle">
 
+    <style name="dialogInputBoxHintStyle" parent="TextAppearance.Material3.LabelSmall">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="dialogInputBoxStyle" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColorHint">@color/blue_gray_200</item>
+        <item name="hintTextColor">@color/blue_gray_200</item>
+        <item name="helperTextTextColor">@color/green_700</item>
+        <item name="placeholderTextColor">@color/blue_gray_200</item>
+        <item name="hintTextAppearance">@style/dialogInputBoxHintStyle</item>
+        <item name="boxStrokeColor">@color/outline_box_color</item>
+        <item name="boxStrokeWidth">1dp</item>
+        <item name="boxStrokeWidthFocused">1dp</item>
+    </style>
+
+    <style name="dialogInputStyle">
+        <item name="android:padding">7dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/gray_700</item>
+    </style>
+
+    <style name="dialogMultilineInputStyle" parent="dialogInputStyle">
+        <item name="android:gravity">top</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:minLines">5</item>
+    </style>
+
+    <style name="dialogFormLabelStyle">
+        <item name="android:layout_marginEnd">@dimen/form_label_spacing_horizontal</item>
+        <item name="fontFamily">@font/raleway</item>
+    </style>
+
+    <style name="dialogSecondaryButton" parent="Widget.Material3.Button.OutlinedButton">
+        <item name="android:minHeight">0dp</item>
+        <item name="android:minWidth">0dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingHorizontal">10dp</item>
+        <item name="android:paddingVertical">8dp</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:strokeColor">@color/gray_200</item>
+        <item name="strokeColor">@color/gray_500</item>
+        <item name="android:textColor">@color/blue_gray_500</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="dialogButton" parent="Widget.Material3.Button.ElevatedButton">
         <item name="maxWidth">0dp</item>
         <item name="maxHeight">0dp</item>
+        <item name="cornerRadius">6dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
     </style>
 
     <style name="itemButtonStyle" parent="mainButtonStyle">

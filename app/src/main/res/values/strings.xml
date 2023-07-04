@@ -40,4 +40,6 @@
     <string name="menu_import_data">Импорт данных</string>
     <string name="additional_code_placeholder">Доп. код</string>
     <string name="additional_code">доп. код</string>
+    <string name="formSign_room">Комната</string>
+    <string name="formInputHint_room">Комната</string>
 </resources>

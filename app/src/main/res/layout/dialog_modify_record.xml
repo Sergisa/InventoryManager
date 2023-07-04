@@ -10,81 +10,76 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/form_row_spacing_vertical">
+        android:layout_marginBottom="@dimen/form_row_spacing_vertical"
+        android:baselineAligned="false"
+        android:orientation="horizontal">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:layout_marginEnd="@dimen/form_input_spacing_horizontal">
+            style="@style/dialogInputBoxStyle"
+
+            android:layout_marginEnd="@dimen/form_input_spacing_horizontal"
+            android:layout_weight="3">
 
             <EditText
-                android:padding="7dp"
                 android:id="@+id/inventory_number"
-                style="@style/Widget.Material3.TextInputEditText.OutlinedBox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/enter_inventory_number" />
+                style="@style/dialogInputStyle"
+                android:hint="@string/enter_inventory_number"
+                android:importantForAutofill="no"
+                android:inputType="numberDecimal|number|text"
+                android:text="101344-5689"
+                android:textColorHint="@color/gray_200" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/dialogInputBoxStyle"
             android:layout_weight="1">
 
             <EditText
                 android:id="@+id/additional_code"
-                android:padding="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/additional_code_placeholder" />
+                style="@style/dialogInputStyle"
+                android:hint="@string/additional_code_placeholder"
+                android:importantForAutofill="no"
+                android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/form_row_spacing_vertical"
         android:gravity="center_vertical"
-        android:layout_marginBottom="@dimen/form_row_spacing_vertical">
+        android:orientation="horizontal">
 
         <TextView
+            style="@style/dialogFormLabelStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/raleway"
-            android:text="Комната"
-            android:layout_marginEnd="@dimen/form_label_spacing_horizontal"/>
+            android:text="@string/formSign_room" />
 
         <com.google.android.material.textfield.TextInputLayout
+            style="@style/dialogInputBoxStyle"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_weight="2">
 
             <EditText
                 android:id="@+id/room_number"
-                android:padding="7dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Комната" />
+                style="@style/dialogInputStyle"
+                android:hint="@string/formInputHint_room"
+                android:importantForAutofill="no"
+                android:inputType="text|number" />
         </com.google.android.material.textfield.TextInputLayout>
     </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout
+        style="@style/dialogInputBoxStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/form_button_row_spacing_vertical">
 
         <EditText
-            android:padding="7dp"
             android:id="@+id/inv_name"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:ems="10"
-            android:gravity="top"
+            style="@style/dialogMultilineInputStyle"
             android:hint="@string/enter_desc"
-            android:inputType="textMultiLine"
-            android:minLines="5" />
+            android:importantForAutofill="no" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -94,19 +89,15 @@
 
         <Button
             android:id="@+id/btn_delete"
-            style="@style/dialogButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
+            style="@style/dialogSecondaryButton"
             android:text="@string/btn_delete"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/btn_save"
             style="@style/dialogButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_gravity="start"
             android:text="@string/btn_update"
 

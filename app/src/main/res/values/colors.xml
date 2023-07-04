@@ -15,6 +15,14 @@
     <color name="l_blue_500">#2196F3</color>
     <color name="l_blue_700">#1976D2</color>
 
+    <color name="blue_gray_200">#B0BBC5</color>
+    <color name="blue_gray_500">#607D8B</color>
+    <color name="blue_gray_700">#455A64</color>
+
+    <color name="gray_200">#EEEEEE</color>
+    <color name="gray_500">#9E9E9E</color>
+    <color name="gray_700">#616161</color>
+
     <color name="l_green_700">#689F38</color>
     <color name="l_green_500">#8BC34A</color>
     <color name="l_green_200">#C5E1A5</color>

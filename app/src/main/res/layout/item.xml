@@ -4,18 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="4dp"
-    app:cardCornerRadius="3dp"
     android:elevation="3dp"
-
+    app:cardCornerRadius="3dp"
     app:cardElevation="3dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:padding="6dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
         android:gravity="start"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="6dp">
 
         <TextView
             android:id="@+id/inventory_code"
@@ -24,8 +23,8 @@
             android:layout_gravity="center_vertical"
             android:fontFamily="@font/baumans"
             android:gravity="center_vertical|start"
-            android:textStyle="bold"
             android:text="10344-0245"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -37,14 +36,13 @@
             android:layout_marginStart="15dp"
             android:fontFamily="@font/baumans"
             android:gravity="center_vertical|start"
+            android:text="56458"
             android:textColor="@color/green_700"
             app:layout_constraintStart_toEndOf="@id/inventory_code"
-            app:layout_constraintTop_toTopOf="parent"
-            android:text="56458"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/room"
-            app:layout_constraintHorizontal_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
@@ -54,16 +52,15 @@
             android:textColor="@color/purple_700"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:text="@string/lorem_ipsum"
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_gravity="top"
-            android:gravity="top"
-            android:textAlignment="viewStart"
+            android:text="@string/lorem_ipsum"
+            android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inventory_code" />
 
