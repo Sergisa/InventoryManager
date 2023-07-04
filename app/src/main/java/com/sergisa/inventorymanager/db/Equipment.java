@@ -19,6 +19,14 @@ public class Equipment {
     @ColumnInfo(name = "ID")
     public int ID;
 
+    public Equipment(String inventoryNumber, String name, String additionalCode, String room, int ID) {
+        this.inventoryNumber = inventoryNumber;
+        this.name = name;
+        this.additionalCode = additionalCode;
+        this.room = room;
+        this.ID = ID;
+    }
+
     public Equipment() {
     }
 

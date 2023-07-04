@@ -20,8 +20,8 @@ public class InventoryApp extends Application {
         super.onCreate();
         instance = this;
         database = Room.
-                databaseBuilder(this, InventoryDatabase.class, "INVENTORY_DATABASE.db")
-                .createFromAsset("INVENTORY_DATABASE.db")
+                databaseBuilder(this, InventoryDatabase.class, "inventory.sqlite")
+                .createFromAsset("inventory.sqlite")
                 .allowMainThreadQueries()
                 .build();
     }

@@ -30,6 +30,14 @@ public class Inventory {
         this.inventoryNumber = inventoryNumber;
     }
 
+    public Inventory(String inventoryNumber, String name, String additionalCode, String room, int ID) {
+        this.inventoryNumber = inventoryNumber;
+        this.name = name;
+        this.additionalCode = additionalCode;
+        this.room = room;
+        this.ID = ID;
+    }
+
     public String getInventoryNumber() {
         return inventoryNumber;
     }

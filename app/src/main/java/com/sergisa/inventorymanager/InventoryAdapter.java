@@ -62,6 +62,10 @@ public class InventoryAdapter extends RecyclerView.Adapter<InventoryAdapter.Inve
     }
 
     private void adjustView(View view, String value) {
+        if (value == null) {
+            view.setVisibility(View.GONE);
+            return;
+        }
         if (value.isEmpty()) {
             view.setVisibility(View.GONE);
         } else {
