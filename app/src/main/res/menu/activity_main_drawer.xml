@@ -14,9 +14,9 @@
             android:icon="@drawable/import_1_svgrepo_com"
             android:title="@string/nav_import" />
 
-    <!--    <item
-            android:id="@+id/nav_slideshow"
+        <item
+            android:id="@+id/nav_equipment"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />-->
+            android:title="@string/menu_slideshow" />
     </group>
 </menu>

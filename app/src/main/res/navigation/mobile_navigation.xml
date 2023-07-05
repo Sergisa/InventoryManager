@@ -17,9 +17,9 @@
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
-   <!-- <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.sergisa.inventorymanager.ui.slideshow.SlideshowFragment"
+    <fragment
+        android:id="@+id/nav_equipment"
+        android:name="com.sergisa.inventorymanager.ui.slideshow.EquipmentFragment"
         android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />-->
+        tools:layout="@layout/fragment_equipment" />
 </navigation>

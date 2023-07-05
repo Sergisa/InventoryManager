@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.sergisa.inventorymanager.databinding.FragmentSlideshowBinding;
+import com.sergisa.inventorymanager.databinding.FragmentEquipmentBinding;
 
-public class SlideshowFragment extends Fragment {
+public class EquipmentFragment extends Fragment {
 
-    private FragmentSlideshowBinding binding;
+    private FragmentEquipmentBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        SlideshowViewModel slideshowViewModel =
-                new ViewModelProvider(this).get(SlideshowViewModel.class);
+        EquipmentViewModel equipmentViewModel =
+                new ViewModelProvider(this).get(EquipmentViewModel.class);
 
-        binding = FragmentSlideshowBinding.inflate(inflater, container, false);
+        binding = FragmentEquipmentBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         final TextView textView = binding.textSlideshow;
-        slideshowViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        equipmentViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

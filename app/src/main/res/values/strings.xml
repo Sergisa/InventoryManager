@@ -34,7 +34,7 @@
     <!-- DATABASE VIEW ACTIVITY-->
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Галерея инвентаря</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_slideshow">Список оборудования</string>
     <string name="nav_inventory">Инвентарь</string>
     <string name="nav_import">Импорт данных</string>
     <string name="menu_import_data">Импорт данных</string>
