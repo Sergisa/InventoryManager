@@ -41,11 +41,10 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textColorHint">@color/blue_gray_200</item>
-        <item name="hintTextColor">@color/blue_gray_200</item>
-        <item name="helperTextTextColor">@color/green_700</item>
+        <item name="hintTextColor">@color/purple_500</item>
         <item name="placeholderTextColor">@color/blue_gray_200</item>
-        <item name="hintTextAppearance">@style/dialogInputBoxHintStyle</item>
         <item name="boxStrokeColor">@color/outline_box_color</item>
+        <item name="hintTextAppearance">@style/dialogInputBoxHintStyle</item>
         <item name="boxStrokeWidth">1dp</item>
         <item name="boxStrokeWidthFocused">1dp</item>
     </style>

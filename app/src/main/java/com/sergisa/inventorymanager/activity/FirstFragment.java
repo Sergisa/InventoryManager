@@ -38,7 +38,7 @@ public class FirstFragment extends Fragment {
         database = InventoryApp.getInstance().getDatabase();
         mainActivity = (MainActivity) getActivity();
         binding = FragmentFirstBinding.inflate(inflater, container, false);
-        FrameLayout bottomSheetLayout = binding.bottomSheet;
+        FrameLayout bottomSheetLayout = binding.BSL.bottomSheet;
         behavior = BottomSheetBehavior.from(bottomSheetLayout);
         behavior.setState(BottomSheetBehavior.STATE_HIDDEN);
         return binding.getRoot();
@@ -79,7 +79,6 @@ public class FirstFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        //codeScanner.startPreview();
     }
 
     @Override
@@ -96,7 +95,7 @@ public class FirstFragment extends Fragment {
 
     private void showBottomSheetDialog(Result result) {
         behavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
-        binding.inventoryNumber.setText(result.getText());
+        binding.BSL.inventoryNumber.setText(result.getText());
         if (result.getBarcodeFormat() == BarcodeFormat.DATA_MATRIX) {
             scannedInventory = new Inventory().withAdditionalCode(result.getText());
         } else if (result.getBarcodeFormat() == BarcodeFormat.QR_CODE) {
@@ -106,9 +105,9 @@ public class FirstFragment extends Fragment {
         }
         mainActivity.add(scannedInventory);
         Log.d("CODE SCAN FRAGMENT", scannedInventory.toString());
-        Log.d(
-                "CODE SCAN FRAGMENT:request",
-                database.inventoryDao().getByCode(result.getText()).toString()
-        );
+        if (scannedInventory != null) {
+            binding.BSL.inventoryName.setText(database.inventoryDao().getByCode(result.getText()).getName());
+            Log.d("CODE SCAN FRAGMENT:request", database.inventoryDao().getByCode(result.getText()).toString());
+        }
     }
 }
