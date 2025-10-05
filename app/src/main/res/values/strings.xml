@@ -14,6 +14,7 @@
     <string name="saveButton">Сохранить</string>
     <string name="empty_list_text">Нет данных</string>
     <string name="enter_inventory_number">Инв.номер</string>
+    <string name="enter_serial_number">Серийный номер</string>
     <string name="enter_desc">Описание</string>
     <string name="add_record">Описание</string>
     <string name="btn_update">Сохранить</string>

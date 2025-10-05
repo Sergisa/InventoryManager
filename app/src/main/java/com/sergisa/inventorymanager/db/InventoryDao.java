@@ -16,7 +16,7 @@ public interface InventoryDao {
     @Query("SELECT * FROM Inventory WHERE ID = :id")
     Inventory getById(long id);
 
-    @Query("SELECT * FROM Inventory WHERE additional_code = :code OR inventory_number = :code")
+    @Query("SELECT * FROM Inventory WHERE additional_code = :code OR inventory_number = :code OR serial_number = :code")
     Inventory getByCode(String code);
 
     @Insert

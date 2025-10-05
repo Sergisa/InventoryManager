@@ -27,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //getBaseContext().moveDatabaseFrom()
-        //SQLiteDatabase db = getBaseContext().openOrCreateDatabase("inventory.db", MODE_PRIVATE, null);
         if (ContextCompat.checkSelfPermission(getBaseContext(), Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
         }

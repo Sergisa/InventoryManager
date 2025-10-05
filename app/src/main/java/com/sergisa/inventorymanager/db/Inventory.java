@@ -1,14 +1,24 @@
 package com.sergisa.inventorymanager.db;
 
+import android.graphics.Bitmap;
+
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+import androidx.room.TypeConverters;
 
 @Entity(tableName = "Inventory")
 public class Inventory {
     @ColumnInfo(name = "inventory_number")
     public String inventoryNumber = "";
+
+    @ColumnInfo(name = "image")
+    @TypeConverters(ImageBitmapString.class)
+    public Bitmap image;
+    @ColumnInfo(name = "serial_number")
+    public String serialNumber = "";
+
     @ColumnInfo(name = "name")
     public String name = "";
     @ColumnInfo(name = "additional_code")
@@ -101,5 +111,21 @@ public class Inventory {
                 ", room='" + room + '\'' +
                 ", ID=" + ID +
                 '}';
+    }
+
+    public String getSerial() {
+        return serialNumber;
+    }
+
+    public void setSerial(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public Bitmap getImage() {
+        return image;
+    }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
     }
 }

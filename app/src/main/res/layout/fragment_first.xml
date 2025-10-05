@@ -5,10 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.budiyev.android.codescanner.CodeScannerView
-        android:id="@+id/scanner_view"
+
+    <ToggleButton
+        android:id="@+id/cameraToggleButton"
+        style="@style/toggleButton"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/ic_toggle_bg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.camera.view.PreviewView
+        android:id="@+id/preview_camera"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -34,6 +45,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <include android:id="@+id/BSL" layout="@layout/bottom_sheet_inventory_description"/>
+        <include
+            android:id="@+id/BSL"
+            layout="@layout/bottom_sheet_inventory_description" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </FrameLayout>

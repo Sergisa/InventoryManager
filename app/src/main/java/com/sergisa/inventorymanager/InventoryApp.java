@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.room.Room;
 
+import com.sergisa.inventorymanager.db.ImageBitmapString;
 import com.sergisa.inventorymanager.db.InventoryDatabase;
 
 public class InventoryApp extends Application {
@@ -22,6 +23,7 @@ public class InventoryApp extends Application {
         database = Room.
                 databaseBuilder(this, InventoryDatabase.class, "inventory.sqlite")
                 .createFromAsset("inventory.sqlite")
+                //.addTypeConverter(new ImageBitmapString())
                 .allowMainThreadQueries()
                 .build();
     }
